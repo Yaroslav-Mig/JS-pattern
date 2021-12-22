@@ -14,6 +14,34 @@
   let so = 'so';
   [ko, so] = [so, ko]; //* so ko
 }
+// ! Конвертируем итерируемые в массив при помощи Spread и Array from
+{
+  // TODO: Строка → Массив -> Строка
+  const myString = 'hello';
+  const array = [...myString]; // [ 'h', 'e', 'l', 'l', 'o' ]
+  array.join(''); // 'hello'
+
+  // TODO: Set → Массив → Set
+  const mySet = new Set([1, 2, 3]);
+  const array = [...mySet]; // [1, 2, 3]
+  new Set(array); // Set { 1, 2, 3 }
+
+  // TODO: Map → Массив → Map
+  const mySet = new Set([1, 2, 3]);
+  const array = [...mySet]; // [1, 2, 3]
+  new Set(array); // Set { 1, 2, 3 }
+
+  // TODO: NodeList → Массив
+  const nodeList = document.querySelectorAll('div');
+  const array = [...document.querySelectorAll('div')];
+  // [ div, div, div]
+
+  // TODO: Array.from vs Spread
+  Array.from('hi'); // ['h', 'i']
+  Array.from(new Set([1, 2, 3])); // [1,2,3]
+  Array.from(new Map([[1, 'one']])); // [[1, 'one']]
+  Array.from(document.querySelectorAll('div')); // [ div, div, div]
+}
 
 // ! Клонирование массивов
 {
@@ -28,7 +56,7 @@
 
   // TODO: Клонируем с деструктуризацией, spread и rest операторами
   const [...rainbowClone] = rainbow;
-  const rainbowClone2 = [...rainbow];
+  const rainbowClone2 = [...rainbow]; // spread
   console.log(rainbow === rainbowClone); // false
   console.log(rainbow === rainbowClone2); // false
 }
@@ -61,3 +89,15 @@ range(0, 4, 1); // [0, 1, 2, 3, 4]
 range(1, 10, 2); // [1, 3, 5, 7, 9]
 range('A'.charCodeAt(0), 'Z'.charCodeAt(0), 1).map((x) => String.fromCharCode(x));
 // ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+
+// ! This examples shows how to use map on different type of data owing to prototype (borrow method)
+{
+  //TODO: how to use map on a String
+  let map = Array.prototype.map;
+  const string = 'Hello World';
+  const arrString = map.call(string, (x) => x.charCodeAt(0));
+
+  // TODO: how to iterate through a collection of objects collected by querySelectorAll
+  let elements = document.querySelectorAll('select option:checked');
+  let values = Array.prototype.map.call(elements, (obj) => obj.value);
+}
