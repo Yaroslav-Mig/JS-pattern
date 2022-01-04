@@ -55,7 +55,7 @@
   console.log(rainbow === rainbowClone2); // false
 
   // TODO: Клонируем с деструктуризацией, spread и rest операторами
-  const [...rainbowClone] = rainbow;
+  const [...rainbowClone] = rainbow; // rest
   const rainbowClone2 = [...rainbow]; // spread
   console.log(rainbow === rainbowClone); // false
   console.log(rainbow === rainbowClone2); // false
@@ -106,4 +106,29 @@ range('A'.charCodeAt(0), 'Z'.charCodeAt(0), 1).map((x) => String.fromCharCode(x)
   const propped = Array.prototype.pop.call(myFish);
   console.log(myFish);
   console.log(popped);
+}
+
+//! Merging two arrays
+// TODO: This example uses spread syntax to push all elements from a second array into the first one.
+{
+  let vegetables = ['parsnip', 'potato'];
+  let moreVegs = ['celery', 'beetroot'];
+  vegetables.push(...moreVegs);
+  console.log(vegetables);
+}
+
+// ! Remove duplicate items in an array
+// TODO: Array.from()
+{
+  let arrayWithNoDuplicates = Array.from(new Set(myArray));
+}
+// TODO: Reduce()
+{
+  let array = ['a', 'b', 'a', 'b', 'c', 'e', 'e', 'c', 'd', 'd', 'd', 'd'];
+  const noDuplicates = array.reduce((acc, val) => {
+    if (!acc.includes(val)) {
+      acc.push(val);
+    }
+    return acc;
+  }, []);
 }
