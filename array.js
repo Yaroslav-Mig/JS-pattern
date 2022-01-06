@@ -132,3 +132,28 @@ range('A'.charCodeAt(0), 'Z'.charCodeAt(0), 1).map((x) => String.fromCharCode(x)
     return acc;
   }, []);
 }
+
+// ! PFind a prime number in an array
+//TODO: filter() and loop for()
+{
+  const array = [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+  function isPrime(value) {
+    for (let i = 2; i < value; i++) {
+      return value % i === 0 ? false : value;
+    }
+    return value > 1;
+  }
+  console.log(array.filter(isPrime));
+}
+//TODO: method filter() and loop for() with square root
+{
+  const array = [-3, 17, 100, 0, 20, 2, 3, 87, 5, 6, 7, 42, 9, 67, 11, 75, 13];
+  function isPrime(value) {
+    if (value % 2 === 0 || value % 5 === 0) return false;
+    const sqrtVal = Math.sqrt(value);
+    for (let divisor = 2; divisor <= sqrtVal; divisor++) {
+      if (value % divisor === 0) return false;
+    }
+    return value > 1;
+  }
+}
