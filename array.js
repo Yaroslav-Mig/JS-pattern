@@ -61,22 +61,48 @@
   console.log(rainbow === rainbowClone2); // false
 }
 
-// ! Удаление пустых значений, дырок в массиве c помощью flat
+// ! Array.prototype.flat()
 {
-  const arr5 = [1, 2, , 4, 5];
-  arr5.flat(); // [1, 2, 4, 5]
-}
+  const arr = [1, 2, [3, 4, [5, 6]]];
 
-// ! Вложеннсть массивов Array.prototype.flat()
-{
-  // TODO: метод reduce и concat только для 1 уровня вложенности
-  const arr = [1, 2, [3, 4]];
-  let flattenedArr = arr.flat(); // To flat single level array
-  flattenedArr = arr.reduce((acc, value) => acc.concat(value), []); // is equivalent to flat single level array
+  // TODO: reduce and concat only for 1 nested level
+  const arr2 = [1, 2, [3, 4]];
+  const flattenedArr = arr2.flat(); // To flat single level array
+  const flattenedArr2 = arr2.reduce((acc, value) => acc.concat(value), []); // is equivalent to flat single level array
+  const flattenedArr3 = [].concat(...arr2);
 
-  // TODO: Flattening nested arrays
+  // TODO: Flattening nested arrays with Infinity
   const arr4 = [1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]];
   arr4.flat(Infinity); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+  // TODO: removes empty slots in arrays:
+  const arr5 = [1, 2, , 4, 5];
+  arr5.flat(); // [1, 2, 4, 5]
+
+  //TODO: Use a stack
+  function Flattened(input) {
+    const stack = [...input];
+    const flatArr = [];
+    while (stack.length) {
+      const next = stack.pop();
+      Array.isArray(next) ? stack.push(...next) : flatArr.push(next);
+    }
+    return flatArr.reverse();
+  }
+
+  //TODO: reduce + concat + isArray + recursivity
+  function Flatten(arr) {
+    return arr.reduce((acc, item) => {
+      return acc.concat(Array.isArray(item) ? Flatten(item) : item);
+    }, []);
+  }
+
+  //TODO: reduce + concat + isArray + recursivity + Infinity
+  function FlatDeep(arr, depth = Infinity) {
+    depth > 0
+      ? arr.reduce((acc, item) => acc.concat(Array.isArray(item) ? FlatDeep(item, depth - 1) : item), [])
+      : arr.slice();
+  }
 }
 
 // ! Sequence generator function Array.prototype.from() -
