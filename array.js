@@ -159,7 +159,7 @@ range('A'.charCodeAt(0), 'Z'.charCodeAt(0), 1).map((x) => String.fromCharCode(x)
   }, []);
 }
 
-// ! PFind a prime number in an array
+// ! Find a prime number in an array
 //TODO: filter() and loop for()
 {
   const array = [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
@@ -181,5 +181,14 @@ range('A'.charCodeAt(0), 'Z'.charCodeAt(0), 1).map((x) => String.fromCharCode(x)
       if (value % divisor === 0) return false;
     }
     return value > 1;
+  }
+}
+//! Using fill() to create a matrix of all 1
+{
+  const array = new Array(3);
+  for (let i = 0; i < array.length; i++) {
+    array[i] = Array(4)
+      .fill(1)
+      .map((el, i) => (el = i));
   }
 }
