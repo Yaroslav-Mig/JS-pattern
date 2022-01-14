@@ -1,4 +1,4 @@
-// ! деструктурирующее присваивание.
+// ! Destructuring assignment
 {
   let arr = ['Yar', 'Mig'];
   let [name, nick] = arr;
@@ -8,7 +8,7 @@
   let [firstName, surname] = 'Ilya Kantor'.split(' ');
 }
 
-// ! Деструктуризацию мы можем использовать, чтобы поменять значения у переменных:
+// ! Destructuring assignment for change variables
 {
   let ko = 'ko';
   let so = 'so';
@@ -23,17 +23,17 @@
 
   // TODO: Set → Массив → Set
   const mySet = new Set([1, 2, 3]);
-  const array = [...mySet]; // [1, 2, 3]
-  new Set(array); // Set { 1, 2, 3 }
+  const array2 = [...mySet]; // [1, 2, 3]
+  new Set(array2); // Set { 1, 2, 3 }
 
   // TODO: Map → Массив → Map
-  const mySet = new Set([1, 2, 3]);
-  const array = [...mySet]; // [1, 2, 3]
-  new Set(array); // Set { 1, 2, 3 }
+  const mySet3 = new Set([1, 2, 3]);
+  const array3 = [...mySet3]; // [1, 2, 3]
+  new Set(array3); // Set { 1, 2, 3 }
 
   // TODO: NodeList → Массив
   const nodeList = document.querySelectorAll('div');
-  const array = [...document.querySelectorAll('div')];
+  const array4 = [...document.querySelectorAll('div')];
   // [ div, div, div]
 
   // TODO: Array.from vs Spread
@@ -43,7 +43,7 @@
   Array.from(document.querySelectorAll('div')); // [ div, div, div]
 }
 
-// ! Клонирование массивов
+// ! Clone array
 {
   // TODO: Клонируем с помощью Array.prototype.slice
   const rainbow = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
@@ -56,9 +56,9 @@
 
   // TODO: Клонируем с деструктуризацией, spread и rest операторами
   const [...rainbowClone] = rainbow; // rest
-  const rainbowClone2 = [...rainbow]; // spread
+  const rainbowClone3 = [...rainbow]; // spread
   console.log(rainbow === rainbowClone); // false
-  console.log(rainbow === rainbowClone2); // false
+  console.log(rainbow === rainbowClone3); // false
 }
 
 // ! Array.prototype.flat()
@@ -131,7 +131,6 @@ range('A'.charCodeAt(0), 'Z'.charCodeAt(0), 1).map((x) => String.fromCharCode(x)
   let myFish = { 0: 'angel', 1: 'clown', 2: 'mandarin', 3: 'sturgeon', length: 4 };
   const propped = Array.prototype.pop.call(myFish);
   console.log(myFish);
-  console.log(popped);
 }
 
 //! Merging two arrays
@@ -144,19 +143,36 @@ range('A'.charCodeAt(0), 'Z'.charCodeAt(0), 1).map((x) => String.fromCharCode(x)
 }
 
 // ! Remove duplicate items in an array
-// TODO: Array.from()
-{
-  let arrayWithNoDuplicates = Array.from(new Set(myArray));
-}
-// TODO: Reduce()
 {
   let array = ['a', 'b', 'a', 'b', 'c', 'e', 'e', 'c', 'd', 'd', 'd', 'd'];
-  const noDuplicates = array.reduce((acc, val) => {
-    if (!acc.includes(val)) {
-      acc.push(val);
-    }
-    return acc;
-  }, []);
+  // TODO: Array.from()
+  {
+    const noDuplicates = Array.from(new Set(array));
+    console.log(noDuplicates);
+  }
+
+  // TODO: Spread operator
+  {
+    const noDuplicates = [...new Set(array)];
+    console.log(noDuplicates);
+  }
+
+  // TODO: Reduce()
+  {
+    const noDuplicates = array.reduce((acc, val) => {
+      if (!acc.includes(val)) {
+        acc.push(val);
+      }
+      return acc;
+    }, []);
+    console.log(noDuplicates);
+  }
+
+  // TODO: Filter()
+  {
+    const noDuplicates = array.filter((val, ind) => (ind === array.indexOf(val) ? true : false));
+    console.log(noDuplicates);
+  }
 }
 
 // ! Find a prime number in an array
