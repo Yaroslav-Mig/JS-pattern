@@ -1,4 +1,4 @@
-// ! Цепь вызова - точечная нотация
+// ! Chain invoke with dot notation
 {
   let ladder = {
     step: 0,
@@ -18,7 +18,7 @@
   ladder.up().up().down().up().up().down().showStep();
 }
 
-// ! Клонирование объектов
+// ! Clone objects
 {
   // TODO: Клонируем с помощью  Object.assign()
   const obj = { a: 1 };
@@ -31,4 +31,18 @@
   obj1.a = 4;
   obj1.b.c = 4;
   console.log(JSON.stringify(obj3)); // { "a": 0, "b": { "c": 0}}
+}
+// ! Delete field in a obj with Destructuring assignment and rest
+{
+  const person = {
+    name: 'Marcus',
+    city: 'Rome',
+    born: 12,
+  };
+
+  function deleteField(source, obj) {
+    const { [source]: forget, ...other } = obj;
+    return other;
+  }
+  console.log(deleteField('name',person));
 }
