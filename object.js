@@ -44,5 +44,5 @@
     const { [source]: forget, ...other } = obj;
     return other;
   }
-  console.log(deleteField('name',person));
+  console.log(deleteField('name', person));
 }

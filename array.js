@@ -199,6 +199,50 @@ range('A'.charCodeAt(0), 'Z'.charCodeAt(0), 1).map((x) => String.fromCharCode(x)
     return value > 1;
   }
 }
+
+//! Max and min in the array
+{
+  const arr = [-15, 0, 2, 4, 8, 6, 100];
+  const arr2 = [-7, 0, 2, 64, 8, 6, 20];
+
+  //TODO: method reduce()
+  const max = arr.reduce((prevVal, curVal) => Math.max(prevVal, curVal), -Infinity);
+  const min = arr.reduce((prevVal, curVal) => Math.min(prevVal, curVal), Infinity);
+  console.log(max);
+  console.log(min);
+
+  //TODO: function apply()
+  const max1 = (arr) => Math.max.apply(null, arr);
+  console.log(max1(arr));
+
+  //TODO: spread operator
+  const min1 = Math.min(...arr);
+  console.log(min1);
+
+  //TODO: loop while()
+  function arrMax(arr) {
+    let max = -Infinity;
+    let len = arr.length;
+    while (len--) {
+      if (arr[len] > max) {
+        max = arr[len];
+      }
+    }
+    return max;
+  }
+  function arrMin(arr) {
+    let min = Infinity;
+    let len = arr.length;
+    while (len--) {
+      if (arr[len] < min) {
+        min = arr[len];
+      }
+    }
+    return min;
+  }
+  console.log(arrMax(arr));
+  console.log(arrMin(arr));
+}
 //! Using fill() to create a matrix of all 1
 {
   const array = new Array(3);
