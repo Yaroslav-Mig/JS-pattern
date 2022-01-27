@@ -10,3 +10,23 @@
     return n !== n;
   }
 }
+// ! nullish coalescing operator (??)
+{
+  let a, b;
+  let result = a !== undefined && a !== null ? a : b;
+}
+
+// ! method indexOf()
+{
+  const array = [1, 2, 3];
+  function indexOf(arr, item, fromIndex) {
+    fromIndex === undefined ? (fromIndex = 0) : fromIndex;
+    for (let i = fromIndex; fromIndex < arr.length; i++) {
+      if (arr[i] === item) {
+        return i;
+      }
+    }
+    return -1;
+  }
+  console.log(indexOf(array, 12));
+}
