@@ -191,12 +191,37 @@ range('A'.charCodeAt(0), 'Z'.charCodeAt(0), 1).map((x) => String.fromCharCode(x)
 {
   const array = [-3, 17, 100, 0, 20, 2, 3, 87, 5, 6, 7, 42, 9, 67, 11, 75, 13];
   function isPrime(value) {
-    if (value % 2 === 0 || value % 5 === 0) return false;
+    if (number > 5 && (number % 2 === 0 || number % 5 === 0)) return false;
     const sqrtVal = Math.sqrt(value);
     for (let divisor = 2; divisor <= sqrtVal; divisor++) {
       if (value % divisor === 0) return false;
     }
     return value > 1;
+  }
+}
+
+//TODO: Double loop for() with push() and flag
+{
+  function isPrimeLoop(limitVal) {
+    const primeArr = [];
+
+    for (let number = 2; number <= limitVal; number++) {
+      let flag = true;
+
+      for (let divisor = 2; divisor < number; divisor++) {
+        if (number % divisor) {
+          continue;
+        } else {
+          flag = false;
+          break;
+        }
+      }
+
+      if (flag) {
+        primeArr.push(number);
+      }
+    }
+    return primeArr;
   }
 }
 
