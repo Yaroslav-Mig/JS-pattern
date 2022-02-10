@@ -130,7 +130,7 @@ range('A'.charCodeAt(0), 'Z'.charCodeAt(0), 1).map((x) => String.fromCharCode(x)
   // TODO: Using apply() or call() on array-like objects with pop()
   let myFish = { 0: 'angel', 1: 'clown', 2: 'mandarin', 3: 'sturgeon', length: 4 };
   const propped = Array.prototype.pop.call(myFish);
-  console.log(myFish);
+  console.log(propped);
 }
 
 //! Merging two arrays
