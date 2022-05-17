@@ -43,7 +43,7 @@
   const reverseStr = (str) => (!str ? '' : reverseStr(str.slice(1)) + str.charAt(0));
   console.log(reverseStr(str));
 }
-// !  
+// ! repeat string
 //TODO: to repeat a string with constructor new Array and from()
 {
   const repeatString = (str, times, divider) => Array(times).fill(str).join(divider);
@@ -72,6 +72,17 @@
 //TODO: to repeat a string with string methods
 {
 	const repeatString = (str, times, divider) => (str + divider).repeat(times).slice(0, -divider.length);
+	console.log(repeatString('yo', 3, ' '));
+  console.log(repeatString('yo', 3, ','));
+}
+{
+	const repeatString = (str, times, divider) => {
+		let repeatStr = '';
+		while (times--) {
+			repeatStr += str + divider;
+		}
+		return repeatStr.slice(0, -divider.length);
+	}
 	console.log(repeatString('yo', 3, ' '));
   console.log(repeatString('yo', 3, ','));
 }
