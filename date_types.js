@@ -24,5 +24,8 @@
     return number < 10 ? number : (number % 10) + getSum(Math.trunc(number / 10));
   }
 }
-
+// TODO: Sum of numbers from 0 to N
+{
+	const sumFirstNumbers = (N) => Boolean(N) ? N + sumFirstNumbers(N - 1) : N;
+}
 
