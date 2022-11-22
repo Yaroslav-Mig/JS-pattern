@@ -30,7 +30,33 @@
   let obj3 = JSON.parse(JSON.stringify(obj1));
   obj1.a = 4;
   obj1.b.c = 4;
-  console.log(JSON.stringify(obj3)); // { "a": 0, "b": { "c": 0}}
+	console.log(JSON.stringify(obj3)); // { "a": 0, "b": { "c": 0}}
+
+ // TODO: deep clone objects or array
+	const arr4 = [1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]];
+
+	const deepClone = (input) => {
+		if (input === null || typeof input !== 'object') {
+			return input;
+		}
+
+		const initialInput = Array.isArray(input) ? [] : {};
+
+		return Object.keys(input).reduce((acc, key) => {
+			acc[key] = deepClone(input[key]);
+			return acc;
+		}, initialInput)
+	}
+
+	const newObj = deepClone(obj1);
+	console.log(newObj === obj1);
+	obj1.b.d = 1;
+	console.log(newObj, obj1);
+	console.log('---------');
+
+	const newArr = deepClone(arr4);
+	console.log(newArr === arr4);
+	console.log(newArr, arr4);
 }
 // ! Delete field in a obj with Destructuring assignment and rest
 {
