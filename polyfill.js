@@ -40,7 +40,7 @@
 
 	function mapFn(arr, fn) {
 		const mappedArr = [];
-		
+
     for (let i = 0; i < arr.length; i++) {
       mappedArr[i] = fn(arr[i]);
     }
@@ -48,4 +48,30 @@
   }
   const newArr = mapFn(array, doubleFn);
   console.log(newArr);
+}
+
+//! method  slice()
+{
+  const sliceFn = (arr, start = 0, end = arr.length) => {
+    const endInd = arr.length;
+    let newArr = [];
+
+    if (start > arr.length) {
+      return newArr;
+    }
+    if (end > endInd) {
+      end = endInd;
+    }
+    if (start < 0) {
+      start = start + endInd;
+    }
+    if (end < 0) {
+      end = end + endInd;
+    }
+
+    for (let i = start; i < end; i++) {
+      newArr.push(arr[i]);
+    }
+    return newArr;
+  };
 }
