@@ -20,6 +20,36 @@
 
 // ! Clone objects
 {
+  const user = {
+    name: 'Yar',
+    age: 35,
+		birthDate: new Date(1987, 7, 19, 12, 0, 0),
+    address: {
+      city: 'Minsk',
+    },
+    laptop: {
+      brand: 'Asus',
+      title: 'VivoBook',
+      date: new Date(2017, 6, 15),
+    },
+    books: ['html', 'css', 'js'],
+    jobs: [
+      { id: 1, title: 'Epam' },
+      { id: 2, title: 'Yandex' },
+    ],
+  };
+  const companies = {
+    yar: [
+      { id: 1, title: 'DeA' },
+      { id: 2, title: 'Yandex' },
+      { id: 3, title: 'Google' },
+    ],
+    art: [
+      { id: 1, title: 'Porta one' },
+      { id: 2, title: 'EPAM' },
+      { id: 3, title: 'Google' },
+    ],
+  };
   // TODO: Клонируем с помощью  Object.assign()
   const obj = { a: 1 };
   const copy = Object.assign({}, obj);
@@ -36,14 +66,20 @@
   const arr4 = [1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]];
 
   const deepClone = (input) => {
-    if (input === null || typeof input !== 'object') {
+    if (!isObject(input)) {
       return input;
+    }
+    if (input instanceof Date) {
+      const copyDate = new Date();
+      copyDate.setTime(input.getTime());
+      return copyDate;
     }
 
     const initialInput = Array.isArray(input) ? [] : {};
 
-    return Object.keys(input).reduce((acc, key) => {
-      acc[key] = deepClone(input[key]);
+		return Object.keys(input).reduce((acc, key) => {
+			const value = input[key];
+			acc[key] = isObject(value) ? deepClone(value) : value;
       return acc;
     }, initialInput);
   };
@@ -57,6 +93,16 @@
   const newArr = deepClone(arr4);
   console.log(newArr === arr4);
   console.log(newArr, arr4);
+  console.log('---------');
+
+  const newUser = deepClone(user);
+  console.log(newUser === user);
+  console.log(newUser, user);
+  console.log('---------');
+
+  const newCompanies = deepClone(companies);
+  console.log(newCompanies === companies);
+  console.log(newCompanies, companies);
 }
 // ! Delete field in a obj with Destructuring assignment and rest
 {
@@ -74,9 +120,9 @@
 }
 
 //! Compare Objects
-const isObject = (obj) => {
-  return obj !== null && typeof obj === 'object';
-};
+function isObject(obj) {
+	return obj !== null && typeof obj === 'object';
+}
 
 const getTypeOf = (input) => {
   return Object.prototype.toString.call(input).slice(8, -1).toLowerCase();
@@ -165,16 +211,16 @@ const getPrimitive = (input) => {
     address: {
       city: 'Gotham',
     },
-		skills: [1, 2, 3],
-		superPower: true
+    skills: [1, 2, 3],
+    superPower: true,
   };
   const hero2 = {
     name: 'Batman',
     address: {
       city: 'Gotham',
     },
-		skills: [1, 2, 3],
-		superPower: true
+    skills: [1, 2, 3],
+    superPower: true,
   };
   const deepEqualObj = (obj_1, obj_2) => {
     const keys_1 = Object.keys(obj_1);
