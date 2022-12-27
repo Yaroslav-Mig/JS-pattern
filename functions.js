@@ -85,8 +85,8 @@
       return 0;
     }
     return function (...newArgs) {
-			if (!newArgs.length) {
-				return getSum(args);
+      if (!newArgs.length) {
+        return getSum(args);
       }
       return add(...args, ...newArgs);
     };
@@ -94,6 +94,44 @@
   console.log(add());
   console.log(add(2)(2)());
   console.log(add(1)(1, 1)());
-	console.log(add(2, 3)(1)(1)(1, 2, 3)());
-	console.log(add(1, 1)(2)(3)(4, 5)(6)(8)());
+  console.log(add(2, 3)(1)(1)(1, 2, 3)());
+  console.log(add(1, 1)(2)(3)(4, 5)(6)(8)());
+}
+//TODO: curring and composition of function is point-free or tacit programming style
+{
+  const str = 'Hello'
+    .replace(/Hello/g, 'Bye')
+    .concat('!')
+    .repeat(2)
+    .split('!')
+    .filter((x) => x !== '!')
+    .map((x) => 'Hello')
+    .toString();
+
+  console.log(str);
+
+  const compose = (...functions) => {
+    return (input) => functions.reduce((acc, fn) => fn(acc), input);
+  };
+
+  const replace = (regex, replacement) => (str) => str.replace(regex, replacement);
+  const concat = (item) => (str) => str.concat(item);
+  const repeat = (number) => (str) => str.repeat(number);
+  const split = (item) => (str) => str.split(item);
+  const filter = (fn) => (arr) => arr.filter(fn);
+  const map = (fn) => (arr) => arr.map(fn);
+  const toString = (arr) => arr.toString();
+
+  const str2 = compose(
+    replace(/Hello/g, 'Bye'),
+    concat('!'),
+    repeat(2),
+    split('!'),
+    filter((x) => x != '!'),
+    map((x) => 'Hello'),
+    toString
+  )('Hello');
+  console.log(str2);
+
+  console.log(map((x) => 'w')(['Hello', 'Hello world', 'Hi']));
 }
