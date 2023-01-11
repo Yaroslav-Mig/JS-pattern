@@ -23,7 +23,7 @@
   const user = {
     name: 'Yar',
     age: 35,
-		birthDate: new Date(1987, 7, 19, 12, 0, 0),
+    birthDate: new Date(1987, 7, 19, 12, 0, 0),
     address: {
       city: 'Minsk',
     },
@@ -50,17 +50,26 @@
       { id: 3, title: 'Google' },
     ],
   };
-  // TODO: Клонируем с помощью  Object.assign()
+  // TODO: Object.assign()
   const obj = { a: 1 };
   const copy = Object.assign({}, obj);
   console.log(copy); // { a: 1 }
 
-  // TODO: Глубокое клонирование
+  //TODO: descriptors
+  const clone = Object.defineProperties({}, Object.getOwnPropertyDescriptors(obj));
+
+  //TODO: for...in
+  for (let key in user) {
+    clone[key] = user[key];
+  }
+
+  // TODO: JSON - deep clone
   let obj1 = { a: 0, b: { c: 0 } };
   let obj3 = JSON.parse(JSON.stringify(obj1));
   obj1.a = 4;
   obj1.b.c = 4;
-  console.log(JSON.stringify(obj3)); // { "a": 0, "b": { "c": 0}}
+  console.log(JSON.stringify(obj3));
+  // { "a": 0, "b": { "c": 0}}
 
   // TODO: deep clone objects or array
   const arr4 = [1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]];
@@ -77,9 +86,9 @@
 
     const initialInput = Array.isArray(input) ? [] : {};
 
-		return Object.keys(input).reduce((acc, key) => {
-			const value = input[key];
-			acc[key] = isObject(value) ? deepClone(value) : value;
+    return Object.keys(input).reduce((acc, key) => {
+      const value = input[key];
+      acc[key] = isObject(value) ? deepClone(value) : value;
       return acc;
     }, initialInput);
   };
@@ -121,7 +130,7 @@
 
 //! Compare Objects
 function isObject(obj) {
-	return obj !== null && typeof obj === 'object';
+  return obj !== null && typeof obj === 'object';
 }
 
 const getTypeOf = (input) => {
@@ -292,6 +301,6 @@ const getPrimitive = (input) => {
   console.log(deepCompare(true, new Boolean(true)));
   console.log(deepCompare('abc', new String('abc')));
   console.log(deepCompare('abc', new String('abcd')));
-	console.log(deepCompare(new Date(), new Date()));
-	console.log(deepCompare(hero1, hero2));
+  console.log(deepCompare(new Date(), new Date()));
+  console.log(deepCompare(hero1, hero2));
 }
