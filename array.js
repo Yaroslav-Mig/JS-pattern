@@ -116,23 +116,6 @@ range(1, 10, 2); // [1, 3, 5, 7, 9]
 range('A'.charCodeAt(0), 'Z'.charCodeAt(0), 1).map((x) => String.fromCharCode(x));
 // ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
-// ! This examples shows how to use various methods on different type of data owing to prototype (borrow method)
-{
-  //TODO: how to use map on a String
-  let map = Array.prototype.map;
-  const string = 'Hello World';
-  const arrString = map.call(string, (x) => x.charCodeAt(0));
-
-  // TODO: how to iterate through a collection of objects collected by querySelectorAll
-  let elements = document.querySelectorAll('select option:checked');
-  let values = Array.prototype.map.call(elements, (obj) => obj.value);
-
-  // TODO: Using apply() or call() on array-like objects with pop()
-  let myFish = { 0: 'angel', 1: 'clown', 2: 'mandarin', 3: 'sturgeon', length: 4 };
-  const propped = Array.prototype.pop.call(myFish);
-  console.log(propped);
-}
-
 //! Merging two arrays
 // TODO: This example uses spread syntax to push all elements from a second array into the first one.
 {
