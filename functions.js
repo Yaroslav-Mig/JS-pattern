@@ -152,3 +152,99 @@
   const propped = Array.prototype.pop.call(myFish);
   console.log(propped);
 }
+
+//! Context, Function binding amd going partial without context
+
+// TODO: we could bind all methods in the object in a loop (bindAll):
+{
+  const user = {};
+  for (let key in user) {
+    if (typeof user[key] == 'function') {
+      user[key] = user[key].bind(user);
+    }
+  }
+}
+
+// TODO: partial function with context
+{
+  const partialFunc = (fn, ...argsBound) => {
+    return function (...nextArgs) {
+      return fn.call(this, ...argsBound, ...nextArgs);
+    };
+  };
+}
+
+//TODO: Debounce functions
+function func(a) {
+  return console.log(a);
+}
+
+{
+  function debounce(fn, ms) {
+    let timerID = null;
+
+    return function name(...args) {
+      clearTimeout(timerID);
+      timerID = setTimeout(() => {
+        fn.apply(this, args);
+      }, ms);
+    };
+  }
+
+  let f = debounce(func, 1000);
+  f('Boz');
+  f('Foo');
+  setTimeout(() => f(3), 500);
+  setTimeout(() => f('KA'), 1600);
+}
+
+{
+  function debounce(fn, delay) {
+    let isWaiting = false;
+
+    return function () {
+      if (isWaiting) {
+        console.log(`Invoke functions is allowed in ${delay / 1000} seconds`);
+        return;
+      }
+      fn.apply(this, arguments);
+      isWaiting = true;
+      setTimeout(() => (isWaiting = false), delay);
+    };
+  }
+}
+
+{
+  function throttle(fn, ms) {
+    let isWaiting = false;
+    let savedThis = null;
+    let savedArgs = null;
+
+    return function wrapper() {
+      if (isWaiting) {
+        savedThis = this;
+        savedArgs = arguments;
+        return;
+      }
+
+      fn.apply(this, arguments);
+      isWaiting = true;
+
+      setTimeout(() => {
+        isWaiting = false;
+        if (savedArgs) {
+          wrapper.apply(savedThis, savedArgs);
+          savedThis = null;
+          savedArgs = null;
+        }
+      }, ms);
+    };
+  }
+
+  let fz = throttle(func, 1000);
+  fz('Boz');
+  fz('Foo');
+  setTimeout(() => fz(3), 100);
+  setTimeout(() => fz(4), 500);
+  setTimeout(() => fz(5), 900);
+}
